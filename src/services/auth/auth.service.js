@@ -15,6 +15,14 @@ const registerUser = async(data) => {
     return {token, user}
 }
 
+const findUser = async (filter) => {
+    const user =  await AuthService.findOne({where: filter});
+    const token = user && createToken(user.userName, user.id);
+
+    return {token, user}
+}
+
 module.exports = {
-    registerUser
+    registerUser,
+    findUser
 }
