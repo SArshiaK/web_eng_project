@@ -6,7 +6,7 @@ const registerValidator = () => {
         body("userName", "نام کاربری را وارد کنید")
             .notEmpty()
             .custom(async (value, { req }) => {
-                if (value && !value.match(/^[a-zA-Z0-9_-]{3,16}$/)) 
+                if (value && !value.match(/^[a-zA-Z0-9_-]{3,16}$/))
                     throw new Error("فرمت نام کاربری اشتباه است")
                 else if(value && await userServices.findUser({userName: value})) {
                     console.log('sadmbasnfsa')
@@ -49,10 +49,21 @@ const registerValidator = () => {
                 }
                 else return value;
             }),
-        
+
     ];
 };
 
+const loginValidator = () => {
+    return [
+        body("userName", "نام کاربری را وارد کنید")
+            .notEmpty(),
+        body("password", 'کلمه عبور  خود را وارد کنید')
+            .notEmpty(),
+    ];
+};
+
+
 module.exports = {
     registerValidator,
+    loginValidator
 };

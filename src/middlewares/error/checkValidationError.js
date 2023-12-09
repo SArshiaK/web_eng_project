@@ -6,7 +6,15 @@ const checkErrors =  (req, res, next) => {
     // in case request params meet the validation criteria
     return next()
   }
-  res.status(422).json({errors: errors.array()})
+  const errs = errors.array()
+  console.log(errs[0])
+  res.status(422).json({
+    success: false,
+    message: errs[0].msg,
+    path:  errs[0].path,
+    location:  errs[0].location
+  })
+  // res.status(422).json({errors: errors.array()})
 };
 
 module.exports = {checkErrors}
