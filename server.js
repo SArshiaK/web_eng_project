@@ -1,6 +1,7 @@
 const express = require('express');
 const {sequelize} = require('./src/models');
 const cors = require('cors');
+const path = require('path');
 const morgan = require("morgan");
 
 const apiRouter = require('./src/routes');
@@ -11,6 +12,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, "./src/public")));
 app.use('/api/v1', apiRouter)
 // app.use('/api/v1', apiRouter);
 

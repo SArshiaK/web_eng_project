@@ -27,9 +27,10 @@ yarn-error.log*
 config.json
 
 /app/public
-/src/public
+#/src/public
 #/public
 .idea
 .prettierrc
 /public/product/
 /public/profile/
+/src/public/uploads/
