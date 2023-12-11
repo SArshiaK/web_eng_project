@@ -7,8 +7,9 @@ const requireAuth = (req, res, next) => {
         return res.status(400).send({success: false, message: "توکن را ارسال کنید"});
 
     jwt.verify(token, process.env.USER_SECRET, async (err, decodedToken) => {
-        if(err)
-            return res.status(400).send({success: false, message: err.message});
+        if(err){
+            return res.status(400).send({success: false, message: 'توکن نامعتبر'});
+        }
 
         const user = await User.findOne({
             where: {id: decodedToken['id']}

@@ -1,4 +1,5 @@
 const Transform = require('../index');
+const {priceFormatter} = require("../../utils/utils");
 
 const getAllProductsTransform = (products) => {
 
@@ -11,7 +12,7 @@ const productTransform = (product) => {
     return {
         id: product.id,
         title: product.title,
-        price: product.price,
+        price: product.price ? priceFormatter(product.price) : 'ناموجود',
         description: product.description,
         placeHolderImg: `products/${product.placeHolderImg}`,
         brandId: product.BrandId,
