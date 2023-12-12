@@ -9,5 +9,7 @@ const {checkErrors} = require('../../middlewares/error/checkValidationError')
 
 productsRouter.get('/getAllProducts', (req, res, next) => {checkErrors(req, res, next)}, productsController.getAllProducts);
 
+productsRouter.get('/getProductsPaginate', (req, res, next) => {checkErrors(req, res, next)}, productsController.getProductsPaginate);
+
 
 module.exports = productsRouter;

@@ -8,6 +8,16 @@ const getAllProductsTransform = (products) => {
     })
 }
 
+const getProductsPaginateTransform = (products) => {
+    return {
+        pages: products.pages,
+        total: products.total,
+        products: products?.docs && products.docs.map((product) => {
+            return productTransform(product)
+        })
+    }
+}
+
 const productTransform = (product) => {
     return {
         id: product.id,
@@ -22,4 +32,5 @@ const productTransform = (product) => {
 
 module.exports = {
     getAllProductsTransform,
+    getProductsPaginateTransform
 }

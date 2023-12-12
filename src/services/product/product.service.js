@@ -9,6 +9,18 @@ const getAllProducts = async () => {
     });
 }
 
+const getProductPaginate = async (page) => {
+    return await Product.paginate({
+        page,
+        paginate: 10,
+        include: {
+            model: Brand,
+            attributes: ['title']
+        }
+    })
+}
+
 module.exports = {
-    getAllProducts
+    getAllProducts,
+    getProductPaginate
 }

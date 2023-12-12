@@ -1,4 +1,6 @@
 'use strict';
+const sequelizePaginate = require('sequelize-paginate')
+
 const {
     Model
 } = require('sequelize');
@@ -11,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     Product.init({
-        title:{
+        title: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        price:{
+        price: {
             type: DataTypes.INTEGER,
         },
         description: {
@@ -42,5 +44,6 @@ module.exports = (sequelize, DataTypes) => {
         sequelize,
         modelName: 'Product',
     });
+    sequelizePaginate.paginate(Product)
     return Product;
 };
