@@ -38,7 +38,29 @@ const getProductsPaginate = async (req, res) => {
     }
 }
 
+const getProductById = async (req, res) => {
+    try {
+        const product = await productService.findProduct({id: req.params.id});
+
+        if(!product)
+            throw {message: 'محصولی با این شناسه یافت نشد'}
+        res.status(200).json({
+            success: true,
+            message: 'اطلاعات محصول ارسال شد',
+            data: product
+        })
+
+    }catch (e) {
+        res.status(400).json({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
+
 module.exports = {
     getAllProducts,
-    getProductsPaginate
+    getProductsPaginate,
+    getProductById
 }

@@ -27,7 +27,18 @@ const getProductPaginate = async (page, search='') => {
     })
 }
 
+const findProduct  = async (filter) => {
+    return await  Product.findOne({
+        where: filter,
+        include: {
+            model: Brand,
+            attributes: ['title']
+        }
+    });
+}
+
 module.exports = {
     getAllProducts,
-    getProductPaginate
+    getProductPaginate,
+    findProduct
 }
