@@ -21,7 +21,8 @@ const getAllProducts = async (req, res) => {
 
 const getProductsPaginate = async (req, res) => {
     try {
-        const products = await productService.getProductPaginate(req.query.page);
+        const products = await productService.getProductPaginate(req.query.page, req.query.search);
+        console.log(products.pages)
 
         res.status(200).json({
             success: true,
