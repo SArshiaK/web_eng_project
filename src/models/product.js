@@ -7,8 +7,11 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Product extends Model {
         static associate(models) {
-            // Product.hasOne(models.Customer);
-            Product.belongsTo(models.Brand);
+            Product.belongsTo(models.Brand,{onUpdate: 'cascade', onDelete: 'cascade'});
+            Product.belongsTo(models.Ram,{onUpdate: 'cascade', onDelete: 'cascade'});
+            Product.belongsTo(models.Storage,{onUpdate: 'cascade', onDelete: 'cascade'});
+            Product.belongsTo(models.OpSystem,{onUpdate: 'cascade', onDelete: 'cascade'});
+            Product.hasMany(models.ProductSpecial);
         }
     }
 
