@@ -28,6 +28,50 @@ const getProductPaginate = async (page, search='', order) => {
     })
 }
 
+const createProductFilters = (data) => {
+    return {
+        ...data.simNum && {
+            simNum: data.simNum,
+        },
+        ...data.simNum && {
+            sdCard:  data.sdCard,
+        },
+        ...data.brandId && {
+            brandId: {
+                [Op.in]: data.brandId,
+            },
+        },
+        ...data.priceRange && {
+            price: {
+                [Op.gt]: data.priceRange[0],
+                [Op.lt]: data.priceRange[1],
+            },
+        }
+
+    }
+
+}
+
+const getProductPaginateByFilters = async (data) => {
+    return await Product.paginate({
+        page: data.page,
+        paginate: 5,
+        include: {
+            model: Brand,
+            attributes: ['title']
+        },
+        where:{
+            title: {
+                [Op.like]: `%${data.search}%`
+            },
+            ...createProductFilters(data)
+
+        },
+        order: [data.order],
+
+    })
+}
+
 const findProduct  = async (filter) => {
     return await  Product.findOne({
         where: filter,
@@ -41,5 +85,6 @@ const findProduct  = async (filter) => {
 module.exports = {
     getAllProducts,
     getProductPaginate,
+    getProductPaginateByFilters,
     findProduct
 }

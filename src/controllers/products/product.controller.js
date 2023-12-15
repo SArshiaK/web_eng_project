@@ -22,9 +22,38 @@ const getAllProducts = async (req, res) => {
 
 const getProductsPaginate = async (req, res) => {
     try {
-        const order = req.query.sort ? createOrders(req.query.sort) : [];
+        const order = req.query.sort ? createOrders(req.query.sort) :  ['createdAt', 'ASC'];
         const products = await productService.getProductPaginate(req.query.page, req.query.search, order);
         console.log(products.pages)
+
+        res.status(200).json({
+            success: true,
+            message: 'اطلاعات تمام محصولات ارسال شد',
+            data: getProductsPaginateTransform(products)
+        })
+
+    }catch (e) {
+        res.status(400).json({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
+const getProductsPaginateByFilters = async (req, res) => {
+    try {
+        const order = req.query.sort ? createOrders(req.query.sort) :  ['createdAt', 'ASC'];
+        let {simNum, hasSD, brandId, priceRange} = req.body;
+
+        const products = await productService.getProductPaginateByFilters({
+            page: req.query.page ? req.query.page : 1,
+            search: req.query.search ? req.query.search : '',
+            order: order ? order : ['createdAt', 'ASC'],
+            simNum: simNum ,
+            sdCard: hasSD ,
+            brandId: brandId ,
+            priceRange: priceRange
+        });
 
         res.status(200).json({
             success: true,
@@ -70,5 +99,6 @@ const getProductById = async (req, res) => {
 module.exports = {
     getAllProducts,
     getProductsPaginate,
-    getProductById
+    getProductById,
+    getProductsPaginateByFilters
 }

@@ -15,6 +15,10 @@ productsRouter.get('/getProductsPaginate',
     (req, res, next) => {checkErrors(req, res, next)},
     productsController.getProductsPaginate);
 
+productsRouter.post('/getProductsPaginateByFilters',
+    (req, res, next) => {checkErrors(req, res, next)},
+    productsController.getProductsPaginateByFilters);
+
 productsRouter.get('/getProductById/:id',
     (req, res, next) => {checkErrors(req, res, next)},
     productsController.getProductById);
