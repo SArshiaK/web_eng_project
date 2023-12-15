@@ -2,6 +2,7 @@ const {Product, Brand, Ram, OpSystem, Storage} = require('../../models');
 
 const {Op} = require('sequelize')
 
+const brandService = require('../brand');
 const getAllProducts = async () => {
     return await Product.findAll({
         include: {
@@ -12,16 +13,27 @@ const getAllProducts = async () => {
 }
 
 const getProductPaginate = async (page, search = '', order) => {
+    const brand = await brandService.findBrand({
+        title: {
+            [Op.like]: `%${search}%`
+        }
+    })
+
     return await Product.paginate({
         page,
         paginate: 5,
         include: {
             model: Brand,
-            attributes: ['title']
+            attributes: ['title'],
         },
         where: {
-            title: {
-                [Op.like]: `%${search}%`
+            [Op.or]: {
+                title: {
+                    [Op.like]: `%${search}%`
+                },
+                ...brand && {
+                    BrandId: brand.id,
+                },
             }
         },
         order: [order],
