@@ -19,6 +19,20 @@ const _addCommas = (str) => {
     }
 };
 
+const createOrders = (sort) => {
+    switch (sort) {
+        case 'new':
+            return ['createdAt', 'DESC']
+        case 'old':
+            return ['createdAt', 'ASC']
+        case 'sell':
+            return ['soldCount', 'DESC']
+        default:
+            return ['createdAt', 'DESC']
+    }
+}
+
 module.exports = {
-    priceFormatter
+    priceFormatter,
+    createOrders
 }

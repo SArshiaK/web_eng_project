@@ -1,5 +1,6 @@
 const productService = require('../../services/product/product.service');
 const {getAllProductsTransform, getProductsPaginateTransform, productTransform} = require("../../transform/product/product.transform");
+const {createOrders} = require("../../utils/utils");
 
 const getAllProducts = async (req, res) => {
     try {
@@ -21,7 +22,8 @@ const getAllProducts = async (req, res) => {
 
 const getProductsPaginate = async (req, res) => {
     try {
-        const products = await productService.getProductPaginate(req.query.page, req.query.search);
+        const order = req.query.sort ? createOrders(req.query.sort) : [];
+        const products = await productService.getProductPaginate(req.query.page, req.query.search, order);
         console.log(products.pages)
 
         res.status(200).json({

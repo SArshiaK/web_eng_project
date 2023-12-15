@@ -11,7 +11,7 @@ const getAllProducts = async () => {
     });
 }
 
-const getProductPaginate = async (page, search='') => {
+const getProductPaginate = async (page, search='', order) => {
     return await Product.paginate({
         page,
         paginate: 5,
@@ -23,7 +23,8 @@ const getProductPaginate = async (page, search='') => {
             title: {
                 [Op.like]: `%${search}%`
             }
-        }
+        },
+        order: [order],
     })
 }
 
