@@ -26,7 +26,11 @@ const productTransform = (product) => {
         description: product.description,
         placeHolderImg: `products/${product.placeHolderImg}`,
         brandId: product.BrandId,
-        brandTitle: product.Brand ? product.Brand.title : null
+        brandTitle: product.Brand ? product.Brand.title : null,
+        ramSize: product.Ram ? product.Ram.size : null,
+        osType: product.OpSystem ? product.OpSystem.type : null,
+        osVersion: product.OpSystem ? product.OpSystem.version : null,
+        storageSize: product.Storage ? product.Storage.size : null,
     }
 }
 

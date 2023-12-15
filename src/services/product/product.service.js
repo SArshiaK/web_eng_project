@@ -1,4 +1,4 @@
-const {Product, Brand} = require('../../models');
+const {Product, Brand, Ram, OpSystem, Storage} = require('../../models');
 
 const {Op} = require('sequelize')
 
@@ -6,12 +6,12 @@ const getAllProducts = async () => {
     return await Product.findAll({
         include: {
             model: Brand,
-            attributes:['title']
+            attributes: ['title']
         }
     });
 }
 
-const getProductPaginate = async (page, search='', order) => {
+const getProductPaginate = async (page, search = '', order) => {
     return await Product.paginate({
         page,
         paginate: 5,
@@ -19,7 +19,7 @@ const getProductPaginate = async (page, search='', order) => {
             model: Brand,
             attributes: ['title']
         },
-        where:{
+        where: {
             title: {
                 [Op.like]: `%${search}%`
             }
@@ -33,8 +33,8 @@ const createProductFilters = (data) => {
         ...data.simNum && {
             simNum: data.simNum,
         },
-        ...data.simNum && {
-            sdCard:  data.sdCard,
+        ...data.sdCard && {
+            sdCard: data.sdCard,
         },
         ...data.brandId && {
             brandId: {
@@ -60,7 +60,7 @@ const getProductPaginateByFilters = async (data) => {
             model: Brand,
             attributes: ['title']
         },
-        where:{
+        where: {
             title: {
                 [Op.like]: `%${data.search}%`
             },
@@ -72,13 +72,24 @@ const getProductPaginateByFilters = async (data) => {
     })
 }
 
-const findProduct  = async (filter) => {
-    return await  Product.findOne({
+const findProduct = async (filter) => {
+    return await Product.findOne({
         where: filter,
-        include: {
+        include: [{
             model: Brand,
             attributes: ['title']
+        }, {
+            model: Ram,
+            attributes: ['size']
+        },{
+            model: OpSystem,
+            attributes: ['version', 'type']
+        }, {
+            model: Storage,
+            attributes: ['size']
         }
+        ],
+
     });
 }
 
