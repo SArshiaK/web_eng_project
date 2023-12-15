@@ -7,11 +7,17 @@ const productsController = require('../../controllers/products/product.controlle
 
 const {checkErrors} = require('../../middlewares/error/checkValidationError')
 
-productsRouter.get('/getAllProducts', (req, res, next) => {checkErrors(req, res, next)}, productsController.getAllProducts);
+productsRouter.get('/getAllProducts',
+    (req, res, next) => {checkErrors(req, res, next)},
+    productsController.getAllProducts);
 
-productsRouter.get('/getProductsPaginate', (req, res, next) => {checkErrors(req, res, next)}, productsController.getProductsPaginate);
+productsRouter.get('/getProductsPaginate',
+    (req, res, next) => {checkErrors(req, res, next)},
+    productsController.getProductsPaginate);
 
-productsRouter.get('/getProductById/:id', (req, res, next) => {checkErrors(req, res, next)}, productsController.getProductById);
+productsRouter.get('/getProductById/:id',
+    (req, res, next) => {checkErrors(req, res, next)},
+    productsController.getProductById);
 
 
 module.exports = productsRouter;

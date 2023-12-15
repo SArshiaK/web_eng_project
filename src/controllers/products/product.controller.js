@@ -1,5 +1,5 @@
 const productService = require('../../services/product/product.service');
-const {getAllProductsTransform, getProductsPaginateTransform} = require("../../transform/product/product.transform");
+const {getAllProductsTransform, getProductsPaginateTransform, productTransform} = require("../../transform/product/product.transform");
 
 const getAllProducts = async (req, res) => {
     try {
@@ -42,12 +42,18 @@ const getProductById = async (req, res) => {
     try {
         const product = await productService.findProduct({id: req.params.id});
 
-        if(!product)
-            throw {message: 'محصولی با این شناسه یافت نشد'}
+        console.log(!product)
+
+        if(!product){
+            return res.status(404).json({
+                success: false,
+                message: 'محصولی با این شناسه یافت نشد'
+            })
+        }
         res.status(200).json({
             success: true,
             message: 'اطلاعات محصول ارسال شد',
-            data: product
+            data: productTransform(product)
         })
 
     }catch (e) {

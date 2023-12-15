@@ -32,5 +32,6 @@ const productTransform = (product) => {
 
 module.exports = {
     getAllProductsTransform,
-    getProductsPaginateTransform
+    getProductsPaginateTransform,
+    productTransform
 }

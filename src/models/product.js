@@ -7,10 +7,10 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Product extends Model {
         static associate(models) {
-            Product.belongsTo(models.Brand,{onUpdate: 'cascade', onDelete: 'cascade'});
-            Product.belongsTo(models.Ram,{onUpdate: 'cascade', onDelete: 'cascade'});
-            Product.belongsTo(models.Storage,{onUpdate: 'cascade', onDelete: 'cascade'});
-            Product.belongsTo(models.OpSystem,{onUpdate: 'cascade', onDelete: 'cascade'});
+            Product.belongsTo(models.Brand, {onUpdate: 'cascade', onDelete: 'cascade'});
+            Product.belongsTo(models.Ram, {onUpdate: 'cascade', onDelete: 'cascade'});
+            Product.belongsTo(models.Storage, {onUpdate: 'cascade', onDelete: 'cascade'});
+            Product.belongsTo(models.OpSystem, {onUpdate: 'cascade', onDelete: 'cascade'});
             Product.hasMany(models.ProductSpecial);
         }
     }
@@ -40,6 +40,14 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 0
         },
         hot: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: 0
+        },
+        simNum: {
+            type: DataTypes.TINYINT,
+            defaultValue: 1
+        },
+        sdCard: {
             type: DataTypes.BOOLEAN,
             defaultValue: 0
         }
