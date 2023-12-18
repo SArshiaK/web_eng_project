@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
             Product.belongsTo(models.Storage, {onUpdate: 'cascade', onDelete: 'cascade'});
             Product.belongsTo(models.OpSystem, {onUpdate: 'cascade', onDelete: 'cascade'});
             Product.hasMany(models.ProductSpecial);
+            Product.hasMany(models.CartProduct);
         }
     }
 

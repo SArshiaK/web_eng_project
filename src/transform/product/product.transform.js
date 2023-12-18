@@ -31,8 +31,8 @@ const productTransform = (product) => {
         osType: product.OpSystem ? product.OpSystem.type : null,
         osVersion: product.OpSystem ? product.OpSystem.version : null,
         storageSize: product.Storage ? `${product.Storage.size} GB` : null,
-        sdCard: product.sdCard === false ? 'فاقد پشتیبانی از کارت حافظه' : 'از کارت حافظه پشتیبانی میکند',
-        simNum: product.simNum === 1 ? 'یک عدد' : 'دو عدد',
+        sdCard:  product.sdCard === false ? 'فاقد پشتیبانی از کارت حافظه' : 'از کارت حافظه پشتیبانی میکند' ,
+        simNum: product.simNum ? product.simNum === 1 ? 'یک عدد' : 'دو عدد' : null,
         specials: product.ProductSpecials ?  productSpecialsString(product.ProductSpecials) : 'ویژگی خاصی نداره'
     }
 }
