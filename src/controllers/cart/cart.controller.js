@@ -58,7 +58,7 @@ const getCart = async (req, res) => {
         }
         res.status(201).json({
             success: true,
-            message: 'محصول مورد نظر به سبد خرید اضافه شد',
+            message: 'اطلاعات سبد خرید ارسال شد',
             data: cartTransform(cart)
         })
 
@@ -69,6 +69,32 @@ const getCart = async (req, res) => {
         })
     }
 }
+
+const getCartProductsCount = async (req, res) => {
+    try {
+        const cart = await cartService.getCart({UserId: req.User.id});
+
+        if (!cart) {
+            return res.status(404).json({
+                success: false,
+                message: 'محصولی در سبد خرید شما موجود نیست'
+            })
+        }
+        res.status(201).json({
+            success: true,
+            message: 'تعداد محصولات موجود در سبد خرید ارسال شد',
+            data: {count: cart.allProductsCount}
+        })
+
+    } catch (e) {
+        res.status(400).json({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
+
 
 const removeFromCart = async (req, res) => {
     try {
@@ -113,5 +139,6 @@ const removeFromCart = async (req, res) => {
 module.exports = {
     addToCart,
     getCart,
+    getCartProductsCount,
     removeFromCart
 }

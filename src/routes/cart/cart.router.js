@@ -15,6 +15,10 @@ cartRouter.get('/getCart',
     (req, res, next) => {checkErrors(req, res, next)},
     cartController.getCart);
 
+cartRouter.get('/getCartProductsCount',
+    (req, res, next) => {checkErrors(req, res, next)},
+    cartController.getCartProductsCount);
+
 cartRouter.delete('/removeFromCart',
     (req, res, next) => {checkErrors(req, res, next)},
     cartController.removeFromCart);
