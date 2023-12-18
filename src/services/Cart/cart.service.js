@@ -17,7 +17,6 @@ const cartProductExistByUserID = async (CartId, ProductId) => {
 }
 
 const increaseCartProductCountPrice = async (CartId, ProductId, price) => {
-    console.log('PRICE', price)
     await CartProduct.increment({
         'productCount': 1,
         'sumPrice': price
@@ -73,6 +72,33 @@ const getCart = async (filter) => {
     })
 }
 
+const findCartProduct = async (filter) => {
+    return await CartProduct.findOne({where: filter});
+}
+
+const removeFromCartProduct = async (filter) => {
+    return await CartProduct.destroy({where: filter});
+}
+
+const decreaseCartProductCountPrice = async (filter, price) => {
+    return await CartProduct.decrement({
+            'productCount': 1,
+            'sumPrice': price
+        },
+        {where: filter});
+}
+
+const decreaseCartPriceCount = async (id, price) => {
+    await Cart.decrement({
+            'allProductsCount': 1,
+            'totalPrice': price
+        },{
+            where: {
+                id
+            }}
+    )
+}
+
 module.exports = {
     createCart,
     getCart,
@@ -80,5 +106,9 @@ module.exports = {
     cartExistByUserID,
     cartProductExistByUserID,
     increaseCartProductCountPrice,
-    increaseCartPriceCount
+    increaseCartPriceCount,
+    findCartProduct,
+    removeFromCartProduct,
+    decreaseCartProductCountPrice,
+    decreaseCartPriceCount
 }

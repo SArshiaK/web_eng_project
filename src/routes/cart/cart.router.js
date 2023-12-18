@@ -15,4 +15,8 @@ cartRouter.get('/getCart',
     (req, res, next) => {checkErrors(req, res, next)},
     cartController.getCart);
 
+cartRouter.delete('/removeFromCart',
+    (req, res, next) => {checkErrors(req, res, next)},
+    cartController.removeFromCart);
+
 module.exports = cartRouter;

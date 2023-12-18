@@ -9,7 +9,6 @@ const registerValidator = () => {
                 if (value && !value.match(/^[a-zA-Z0-9_-]{3,16}$/))
                     throw new Error("فرمت نام کاربری اشتباه است")
                 else if(value && await userServices.findUser({userName: value})) {
-                    console.log('sadmbasnfsa')
                     throw new Error("این نام کاربری قبلا استفاده شده است")
                 }
                 else return value;

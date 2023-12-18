@@ -24,7 +24,6 @@ const getProductsPaginate = async (req, res) => {
     try {
         const order = req.query.sort ? createOrders(req.query.sort) :  ['createdAt', 'ASC'];
         const products = await productService.getProductPaginate(req.query.page, req.query.search, order);
-        console.log(products.pages)
 
         res.status(200).json({
             success: true,
@@ -73,8 +72,6 @@ const getProductsPaginateByFilters = async (req, res) => {
 const getProductById = async (req, res) => {
     try {
         const product = await productService.findProduct({id: req.params.id});
-
-        console.log(!product)
 
         if(!product){
             return res.status(404).json({

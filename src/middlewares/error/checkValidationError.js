@@ -7,7 +7,6 @@ const checkErrors =  (req, res, next) => {
     return next()
   }
   const errs = errors.array()
-  console.log(errs[0])
   res.status(422).json({
     success: false,
     message: errs[0].msg,

@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const {User} = require('../models');
 const requireAuth = (req, res, next) => {
     const token = req.headers.token;
-    console.log(req.headers.token)
     if(!token)
         return res.status(400).send({success: false, message: "توکن را ارسال کنید"});
 
