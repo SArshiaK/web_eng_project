@@ -1,4 +1,4 @@
-const {Product, Brand, Ram, OpSystem, Storage} = require('../../models');
+const {Product, Brand, Ram, OpSystem, Storage, ProductSpecial, Special} = require('../../models');
 
 const {Op} = require('sequelize')
 
@@ -99,6 +99,13 @@ const findProduct = async (filter) => {
         }, {
             model: Storage,
             attributes: ['size']
+        },{
+            model: ProductSpecial,
+            include: {
+                model: Special,
+                attributes: ['title', 'description']
+
+            }
         }
         ],
 

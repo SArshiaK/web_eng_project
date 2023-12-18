@@ -27,11 +27,22 @@ const productTransform = (product) => {
         placeHolderImg: `products/${product.placeHolderImg}`,
         brandId: product.BrandId,
         brandTitle: product.Brand ? product.Brand.title : null,
-        ramSize: product.Ram ? product.Ram.size : null,
+        ramSize: product.Ram ? `${product.Ram.size} GB` : null,
         osType: product.OpSystem ? product.OpSystem.type : null,
         osVersion: product.OpSystem ? product.OpSystem.version : null,
-        storageSize: product.Storage ? product.Storage.size : null,
+        storageSize: product.Storage ? `${product.Storage.size} GB` : null,
+        sdCard: product.sdCard === false ? 'فاقد پشتیبانی از کارت حافظه' : 'از کارت حافظه پشتیبانی میکند',
+        simNum: product.simNum === 1 ? 'یک عدد' : 'دو عدد',
+        specials: product.ProductSpecials ?  productSpecialsString(product.ProductSpecials) : 'ویژگی خاصی نداره'
     }
+}
+
+const productSpecialsString = (productSpecials) => {
+    let specials = '';
+    productSpecials.map((productSpecial) => {
+        specials += productSpecial?.Special?.title + '\n';
+    })
+    return specials
 }
 
 module.exports = {
