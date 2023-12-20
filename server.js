@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, "./src/public")));
 app.use('/api/v1', apiRouter)
 // app.use('/api/v1', apiRouter);
 
+
 sequelize.sync()
     .then(() => console.log('Connected to database'))
     .catch((err) => console.log('Database connection failed', err))
