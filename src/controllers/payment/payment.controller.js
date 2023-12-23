@@ -131,7 +131,25 @@ const verifyPayment = async (req, res) => {
     }
 }
 
+const getOrderHistory = async (req, res) => {
+    try {
+        const receiptDetails = await receiptService.getReceipt({UserId: req.User.id})
+        res.status(201).json({
+            success: true,
+            message: 'عملیات با موفقیت انجام شد',
+            data: receiptDetails
+        })
+
+    } catch (e) {
+        res.status(400).json({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
 module.exports = {
     startPayment,
-    verifyPayment
+    verifyPayment,
+    getOrderHistory
 }
