@@ -9,7 +9,6 @@ const addToCart = async (req, res) => {
         if (!cart)
             cart = await cartService.createCart({UserId: req.User.id, orderStatus: "WAITING"});
 
-        console.log(req.body)
         const product = await productService.findProduct({id: req.body.ProductId});
         if (!product) {
             return res.status(404).json({
