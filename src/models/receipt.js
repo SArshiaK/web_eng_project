@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     class Receipt extends Model {
         static associate(models) {
             Receipt.belongsTo(models.User, {onUpdate: 'cascade', onDelete: 'cascade'});
+            Receipt.belongsTo(models.Transaction, {onUpdate: 'cascade', onDelete: 'cascade'});
             Receipt.hasMany(models.ReceiptDetail);
         }
     }

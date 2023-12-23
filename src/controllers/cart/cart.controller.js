@@ -17,6 +17,12 @@ const addToCart = async (req, res) => {
                 message: 'محصول یافت نشد'
             })
         }
+        if(product.stock <= 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'موجودی محصول تمام شده است'
+            })
+        }
 
         if (await cartService.cartProductExistByUserID(cart.id, req.body.ProductId)) {
             await cartService.increaseCartProductCountPrice(cart.id, req.body.ProductId, product.price)

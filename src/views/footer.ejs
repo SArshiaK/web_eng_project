@@ -1,0 +1,15 @@
+<div class="mt-5" style="width: 100%;">
+
+    <% var link = type === 'success' ? "waybox://wallet?status=ok" : "waybox://wallet?status=noOk" %>
+
+    <a href="<%- isWeb === 'false' ? link : process.env.WebServerAddress %>">
+        <button type="button" class="mt-5 btn btn-primary" style="width:100%; height: 80px">
+            <span style="font-size: 2em;">بازگشت به اپلیکیشن</span>
+        </button>
+    </a>
+</div>
+</div>
+</div>
+</body>
+
+</html>

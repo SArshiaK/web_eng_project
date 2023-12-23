@@ -13,6 +13,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "./src/public")));
+app.use(express.static(path.join(__dirname, "./public")));
+app.set('views', path.join(__dirname, './src/views'));
+app.set('view engine', 'ejs');
+
 app.use('/api/v1', apiRouter)
 // app.use('/api/v1', apiRouter);
 

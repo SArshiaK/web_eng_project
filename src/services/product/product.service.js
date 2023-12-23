@@ -112,9 +112,37 @@ const findProduct = async (filter) => {
     });
 }
 
+const increaseProductSoldCount = async (id, amount) => {
+    return await Product.increment(
+        {
+            'soldCount': amount
+        },
+        {
+            where: {
+                id
+            }
+        }
+    )
+}
+
+const decreaseProductStock = async (id, amount) => {
+    return await Product.decrement(
+        {
+            'stock': amount
+        },
+        {
+            where: {
+                id
+            }
+        }
+    )
+}
+
 module.exports = {
     getAllProducts,
     getProductPaginate,
     getProductPaginateByFilters,
-    findProduct
+    findProduct,
+    increaseProductSoldCount,
+    decreaseProductStock
 }

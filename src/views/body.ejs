@@ -1,0 +1,9 @@
+<%- include('./header.ejs') %>
+<%if (type == 'success') { %>
+<div class="mt-5" style="font-size: 4em;"><b>پرداخت با موفقیت انجام شد</b></div>
+    <div class="mt-5" style="font-size: 3em;">شناسه تراکنش : <span style='font-size: 1em;'><b><%= refId %></b></span></div>
+    <%}else {%>
+<div class="mt-5" style="font-size: 4em;"><b>متاسفیم خطایی پیش آمده!</b></div>
+    <div class="mt-5" style="font-size: 3em;color:red;"><%= errorMessage %></div>
+    <%} %>
+<%- include('./footer.ejs') %>
