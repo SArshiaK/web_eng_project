@@ -5,6 +5,7 @@ const productService = require('../../services/product/product.service');
 const {payRequest} = require('../../lib/axios.request');
 const {userProfileTransform} = require("../../transform/user/user.transform");
 const {TRANSACTION_STATUS} = require('../../static/index');
+const {getReceiptsTransform} = require("../../transform/payment/receipt.transform");
 
 async function createOptions(body, url) {
     let options = {
@@ -137,7 +138,7 @@ const getOrderHistory = async (req, res) => {
         res.status(201).json({
             success: true,
             message: 'عملیات با موفقیت انجام شد',
-            data: receiptDetails
+            data: getReceiptsTransform(receiptDetails)
         })
 
     } catch (e) {

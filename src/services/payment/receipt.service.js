@@ -30,14 +30,14 @@ const getReceipt = async (filter) => {
                     model: Storage,
                     attributes: ['size']
                 },
-                //     {
-                //     model: ProductSpecial,
-                //     include: {
-                //         model: Special,
-                //         attributes: ['title', 'description']
-                //
-                //     }
-                // }
+                    {
+                    model: ProductSpecial,
+                    include: {
+                        model: Special,
+                        attributes: ['title', 'description']
+
+                    }
+                }
                 ],
             }
         }

@@ -94,10 +94,36 @@ const getProductById = async (req, res) => {
     }
 }
 
+const getProductStock = async (req, res) => {
+    try {
+        const product = await productService.findProduct({id: req.params.id});
+
+        if(!product){
+            return res.status(404).json({
+                success: false,
+                message: 'محصولی با این شناسه یافت نشد'
+            })
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'موجودی محصول',
+            data: {stock: product.stock}
+        })
+
+    }catch (e) {
+        res.status(400).json({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
 
 module.exports = {
     getAllProducts,
     getProductsPaginate,
     getProductById,
-    getProductsPaginateByFilters
+    getProductsPaginateByFilters,
+    getProductStock
 }

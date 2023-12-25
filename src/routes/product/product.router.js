@@ -23,5 +23,8 @@ productsRouter.get('/getProductById/:id',
     (req, res, next) => {checkErrors(req, res, next)},
     productsController.getProductById);
 
+productsRouter.get('/getProductStock/:id',
+    (req, res, next) => {checkErrors(req, res, next)},
+    productsController.getProductStock);
 
 module.exports = productsRouter;
