@@ -17,6 +17,7 @@ const receiptDetailsTransform = (receiptDetails) => {
         return {
             id: receiptDetail.id,
             sumPrice: receiptDetail.sumPrice,
+            sumPriceFormat: priceFormatter(receiptDetail.sumPrice),
             productCount: receiptDetail.productCount,
             ProductId: receiptDetail.ProductId,
             Product: receiptDetail.Product ? productTransform(receiptDetail.Product) : 'no-product'
