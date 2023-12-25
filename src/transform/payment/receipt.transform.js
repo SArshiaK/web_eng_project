@@ -27,6 +27,7 @@ const receiptDetailsTransform = (receiptDetails) => {
 const receiptTransform = (receipt) => {
     return {
         id: receipt.id,
+        TransactionId: receipt.TransactionId,
         totalPrice: receipt.totalPrice,
         totalPriceFormat: receipt.totalPrice ? priceFormatter(receipt.totalPrice) : 'ناموجود',
         allProductsCount: receipt.allProductsCount,
