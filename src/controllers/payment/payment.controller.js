@@ -90,15 +90,15 @@ const verifyPayment = async (req, res) => {
             const cartProducts = await cartService.findAllCartProducts({CartId: cart.id});
 
             const receiptProducts = [];
-            console.log('CART PRODUCT COUNT', cart.allProductCount )
+            console.log('CART PRODUCT COUNT', cart.allProductsCount )
             const receipt = await receiptService.createReceipt({
                 totalPrice: cart.totalPrice,
-                allProductCount: cart.allProductCount,
+                allProductsCount: cart.allProductsCount,
                 TransactionId: transaction.id,
                 UserId: req.query.userId,
                 paymentStatus: 'PAYED'
             })
-            console.log('RECEIPT PRODUCT COUNT', receipt.allProductCount )
+            console.log('RECEIPT PRODUCT COUNT', receipt.allProductsCount )
 
             cartProducts.map(async (cartProduct) => {
                 receiptProducts.push({
