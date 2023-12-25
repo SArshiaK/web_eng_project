@@ -13,14 +13,21 @@ paymentRouter.get('/startPayment', requireAuth,
     (req, res, next) => {checkErrors(req, res, next)},
     paymentController.startPayment);
 
+paymentRouter.get('/verifyPayment',
+    (req, res, next) => {checkErrors(req, res, next)},
+    paymentController.verifyPayment);
+
 paymentRouter.get('/getOrderHistory', requireAuth,
     (req, res, next) => {checkErrors(req, res, next)},
     paymentController.getOrderHistory);
 
-
-paymentRouter.get('/verifyPayment',
+paymentRouter.get('/getOrderById/:id', requireAuth,
     (req, res, next) => {checkErrors(req, res, next)},
-    paymentController.verifyPayment);
+    paymentController.getOrderById);
+
+paymentRouter.get('/getTransaction/:id', requireAuth,
+    (req, res, next) => {checkErrors(req, res, next)},
+    paymentController.getTransaction);
 
 
 module.exports = paymentRouter;

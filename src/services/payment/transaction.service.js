@@ -18,6 +18,16 @@ const findTransactions = (filter, page=1) => Transaction.findAll(
 
 );
 
+const findTransactionsPaginate = (filter, page=1) => Transaction.paginate(
+    {
+        where: filter,
+        page,
+        paginate: 10
+
+    },
+);
+
+
 const findTransactionById = (id) => Transaction.findOne({where: {id}});
 
 const duplicateTransaction = (filter) => Transaction.findOne({where: {
@@ -30,5 +40,6 @@ module.exports = {
     updateTransaction,
     findTransactions,
     findTransactionById,
-    duplicateTransaction
+    duplicateTransaction,
+    findTransactionsPaginate,
 }

@@ -5,7 +5,8 @@ const productService = require('../../services/product/product.service');
 const {payRequest} = require('../../lib/axios.request');
 const {userProfileTransform} = require("../../transform/user/user.transform");
 const {TRANSACTION_STATUS} = require('../../static/index');
-const {getReceiptsTransform} = require("../../transform/payment/receipt.transform");
+const {getReceiptsTransform, receiptTransform} = require("../../transform/payment/receipt.transform");
+const {transactionTransform} = require("../../transform/payment/transaction.transform");
 
 async function createOptions(body, url) {
     let options = {
@@ -153,8 +154,44 @@ const getOrderHistory = async (req, res) => {
     }
 }
 
+const getOrderById = async (req, res) => {
+    try {
+        const receipt = await receiptService.getReceiptById(req.params.id)
+        res.status(201).json({
+            success: true,
+            message: 'عملیات با موفقیت انجام شد',
+            data: receiptTransform(receipt)
+        })
+
+    } catch (e) {
+        res.status(400).json({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
+const getTransaction = async (req, res) => {
+    try {
+        const transaction = await transactionService.findTransactionById(req.params.id)
+        res.status(201).json({
+            success: true,
+            message: 'عملیات با موفقیت انجام شد',
+            data: transactionTransform(transaction)
+        })
+
+    } catch (e) {
+        res.status(400).json({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
 module.exports = {
     startPayment,
     verifyPayment,
-    getOrderHistory
+    getOrderHistory,
+    getOrderById,
+    getTransaction
 }

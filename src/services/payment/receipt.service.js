@@ -60,9 +60,44 @@ const getReceiptDetails = async (filter) => {
     })
 }
 
+const getReceiptById = async(id) => {
+    return await Receipt.findOne({
+        where: {id},
+        include: {
+            model: ReceiptDetail,
+            include: {
+                model: Product,
+                include: [{
+                    model: Brand,
+                    attributes: ['title']
+                }, {
+                    model: Ram,
+                    attributes: ['size']
+                }, {
+                    model: OpSystem,
+                    attributes: ['version', 'type']
+                }, {
+                    model: Storage,
+                    attributes: ['size']
+                },
+                    {
+                        model: ProductSpecial,
+                        include: {
+                            model: Special,
+                            attributes: ['title', 'description']
+
+                        }
+                    }
+                ],
+            }
+        }
+    })
+}
+
 module.exports = {
     createReceipt,
     bulkCreateReceiptDetail,
     getReceiptDetails,
-    getReceipt
+    getReceipt,
+    getReceiptById
 }
