@@ -43,7 +43,7 @@ const startPayment = async (req, res) => {
             order_id: transaction.id,
             amount: cart.totalPrice,
             phone: req.User.phoneNumber,
-            callback: `${process.env.SERVER_ADDRESS}:${process.env.PORT}/api/v1/payment/verifyPayment?userId=${req.User.id}`
+            callback: `${process.env.SERVER_ADDRESS}/api/v1/payment/verifyPayment?userId=${req.User.id}`
         }, 'payment');
 
         const result = await payRequest(options);
