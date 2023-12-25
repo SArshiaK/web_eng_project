@@ -43,6 +43,7 @@ const startPayment = async (req, res) => {
             order_id: transaction.id,
             amount: cart.totalPrice,
             phone: req.User.phoneNumber,
+            // callback: `http://${process.env.SERVER_ADDRESS}:${process.env.PORT}/api/v1/payment/verifyPayment?userId=${req.User.id}`
             callback: `${process.env.SERVER_ADDRESS}/api/v1/payment/verifyPayment?userId=${req.User.id}`
         }, 'payment');
 
@@ -88,6 +89,7 @@ const verifyPayment = async (req, res) => {
             const cartProducts = await cartService.findAllCartProducts({CartId: cart.id});
 
             const receiptProducts = [];
+            console.log('CART PRODUCT COUNT', cart.allProductCount )
             const receipt = await receiptService.createReceipt({
                 totalPrice: cart.totalPrice,
                 allProductCount: cart.allProductCount,
@@ -95,6 +97,8 @@ const verifyPayment = async (req, res) => {
                 UserId: req.query.userId,
                 paymentStatus: 'PAYED'
             })
+            console.log('RECEIPT PRODUCT COUNT', receipt.allProductCount )
+
             cartProducts.map(async (cartProduct) => {
                 receiptProducts.push({
                     sumPrice: cartProduct.sumPrice,
@@ -134,7 +138,7 @@ const verifyPayment = async (req, res) => {
 
 const getOrderHistory = async (req, res) => {
     try {
-        const receiptDetails = await receiptService.getReceipt({UserId: req.User.id})
+        const receiptDetails = await receiptService.getReceipt({UserId: req.User.id}, req.query.page ? req.query.page : 1 )
         res.status(201).json({
             success: true,
             message: 'عملیات با موفقیت انجام شد',

@@ -1,6 +1,7 @@
 const {Receipt, ReceiptDetail, Product, Cart, CartProduct, Brand, Ram, OpSystem, Storage, ProductSpecial, Special} = require('../../models');
 
 const createReceipt = async (data) => {
+    console.log('CREATING RECEIPT DATA', data)
     return await Receipt.create(data);
 }
 
@@ -8,11 +9,12 @@ const bulkCreateReceiptDetail = async (data) => {
     return await ReceiptDetail.bulkCreate(data);
 }
 
-const getReceipt = async (filter) => {
+const getReceipt = async (filter, page) => {
     return await Receipt.paginate({
-        page: 1,
-        paginate: 5,
+        page,
+        paginate: 10,
         where: filter,
+        order: [['updatedAt', 'DESC']],
         include: {
             model: ReceiptDetail,
             include: {
