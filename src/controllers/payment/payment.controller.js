@@ -27,7 +27,7 @@ const startPayment = async (req, res) => {
     try {
         const cart = await cartService.getCart({UserId: req.User.id});
         if (!cart || cart.totalPrice <= 0 || cart.allProductsCount <= 0) {
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 message: 'سبد خرید شما خالی است'
             })
@@ -43,7 +43,7 @@ const startPayment = async (req, res) => {
             order_id: transaction.id,
             amount: cart.totalPrice,
             phone: req.User.phoneNumber,
-            callback: `http://${process.env.SERVER_ADDRESS}:${process.env.PORT}/api/v1/payment/verifyPayment?userId=${req.User.id}`
+            callback: `${process.env.SERVER_ADDRESS}:${process.env.PORT}/api/v1/payment/verifyPayment?userId=${req.User.id}`
         }, 'payment');
 
         const result = await payRequest(options);
