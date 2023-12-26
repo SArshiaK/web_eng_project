@@ -2,7 +2,7 @@ const {Product, Brand, Ram, OpSystem, Storage, ProductSpecial, Special} = requir
 
 const {Op} = require('sequelize')
 
-const brandService = require('../brand');
+const brandService = require('../brand/brand.service');
 const getAllProducts = async () => {
     return await Product.findAll({
         include: {

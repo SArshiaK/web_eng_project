@@ -6,6 +6,11 @@ const findBrand = async(filter) => {
     })
 }
 
+const getAllBrands = async () => {
+    return await Brand.findAll();
+}
+
 module.exports = {
-    findBrand
+    findBrand,
+    getAllBrands
 }
