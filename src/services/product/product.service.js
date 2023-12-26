@@ -67,7 +67,7 @@ const createProductFilters = (data) => {
 const getProductPaginateByFilters = async (data) => {
     return await Product.paginate({
         page: data.page,
-        paginate: 5,
+        paginate: 10,
         include: {
             model: Brand,
             attributes: ['title']
