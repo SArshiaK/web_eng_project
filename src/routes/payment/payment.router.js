@@ -29,5 +29,9 @@ paymentRouter.get('/getTransaction/:id', requireAuth,
     (req, res, next) => {checkErrors(req, res, next)},
     paymentController.getTransaction);
 
+paymentRouter.get('/getTransactionsPaginate', requireAuth,
+    (req, res, next) => {checkErrors(req, res, next)},
+    paymentController.getTransactionsPaginate);
+
 
 module.exports = paymentRouter;

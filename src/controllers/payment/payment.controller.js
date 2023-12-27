@@ -188,10 +188,28 @@ const getTransaction = async (req, res) => {
     }
 }
 
+const getTransactionsPaginate = async (req, res) => {
+    try {
+        const transactions = await transactionService.findTransactionsPaginate({UserId: req.User.id}, req.query.page);
+        res.status(201).json({
+            success: true,
+            message: 'عملیات با موفقیت انجام شد',
+            data: transactions
+        })
+
+    } catch (e) {
+        res.status(400).json({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
 module.exports = {
     startPayment,
     verifyPayment,
     getOrderHistory,
     getOrderById,
-    getTransaction
+    getTransaction,
+    getTransactionsPaginate
 }

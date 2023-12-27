@@ -41,11 +41,11 @@ const getProductPaginate = async (page, search = '', order) => {
 }
 
 const createProductFilters = (data) => {
-    return {
+    return  {
         ...data.simNum && {
             simNum: data.simNum,
         },
-        ...data.sdCard && {
+        ...(data.sdCard != undefined && data.sdCard != null) && {
             sdCard: data.sdCard,
         },
         ...data.brandId && {

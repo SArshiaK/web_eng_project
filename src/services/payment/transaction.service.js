@@ -22,7 +22,8 @@ const findTransactionsPaginate = (filter, page=1) => Transaction.paginate(
     {
         where: filter,
         page,
-        paginate: 10
+        paginate: 10,
+        order: [['updatedAt', 'DESC']]
 
     },
 );
