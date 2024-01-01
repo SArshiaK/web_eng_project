@@ -5,10 +5,10 @@ const authRouter = require('./auth');
 const productRouter = require('./produtc');
 
 
-// const {requireAuth} = require('../middlewares/auth.middleware');
+const {requireAdminAuth} = require('../../middlewares/auth.middleware');
 
 
 router.use('/auth', authRouter);
-router.use('/product', productRouter);
+router.use('/product', requireAdminAuth, productRouter);
 
 module.exports = router;
