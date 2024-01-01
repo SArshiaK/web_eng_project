@@ -48,7 +48,7 @@ const getProductsPaginateByFilters = async (req, res) => {
         const products = await productService.getProductPaginateByFilters({
             page: req.query.page ? req.query.page : 1,
             search: req.query.search ? req.query.search : '',
-            order: order ? order : ['createdAt', 'ASC'],
+            order,
             simNum: simNum ,
             sdCard: hasSD ,
             brandId: brandId ,

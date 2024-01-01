@@ -8,6 +8,8 @@ const brandRouter = require('./brand/brand.router');
 const userRouter = require('./user/user.router');
 const paymentRouter = require('./payment/payment.router');
 
+const adminRouter = require('./admin/index');
+
 const {requireAuth} = require('../middlewares/auth.middleware');
 
 
@@ -17,5 +19,7 @@ router.use('/cart', requireAuth, cartRouter);
 router.use('/brand', requireAuth, brandRouter);
 router.use('/user', requireAuth, userRouter);
 router.use('/payment', paymentRouter);
+
+router.use('/admin', adminRouter);
 
 module.exports = router;

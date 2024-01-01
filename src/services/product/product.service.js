@@ -138,11 +138,16 @@ const decreaseProductStock = async (id, amount) => {
     )
 }
 
+const createProduct = async (data) => {
+    return await Product.create(data);
+}
+
 module.exports = {
     getAllProducts,
     getProductPaginate,
     getProductPaginateByFilters,
     findProduct,
     increaseProductSoldCount,
-    decreaseProductStock
+    decreaseProductStock,
+    createProduct
 }

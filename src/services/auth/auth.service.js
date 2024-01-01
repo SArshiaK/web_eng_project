@@ -1,4 +1,5 @@
 const {User: AuthService} = require('../../models');
+const {Admin: AdminService} = require('../../models');
 const jwt = require('jsonwebtoken');
 
 const maxAge = 5*24 * 60 * 60;
@@ -8,9 +9,23 @@ const createToken = (userName, id) => {
         expiresIn: maxAge,
     })
 }
+
+const createAdminToken = (userName, id) => {
+    return jwt.sign({userName, id}, process.env.ADMIN_SECRET, {
+        expiresIn: maxAge,
+    })
+}
+
 const registerUser = async(data) => {
     const user = await AuthService.create(data);
     const token = createToken(user.userName, user.id);
+
+    return {token, user}
+}
+
+const registerAdmin = async (data) => {
+    const user = await AdminService.create(data);
+    const token = createAdminToken(user.userName, user.id);
 
     return {token, user}
 }
@@ -22,7 +37,16 @@ const findUser = async (filter) => {
     return {token, user}
 }
 
+const findAdmin = async (filter) => {
+    const user =  await AdminService.findOne({where: filter});
+    const token = user && createAdminToken(user.userName, user.id);
+
+    return {token, user}
+}
+
 module.exports = {
     registerUser,
-    findUser
+    findUser,
+    registerAdmin,
+    findAdmin
 }
