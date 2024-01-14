@@ -32,7 +32,9 @@ const registerAdmin = async (req, res) => {
 const adminLogIn = async (req, res) => {
     try {
         const {token, user} = await authServices.findAdmin({userName: req.body.userName});
+
         const result = await comparePassword(req.body.password, user.password);
+
         if(!result)
             throw 'رمز عبور اشتباه است'
 

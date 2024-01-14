@@ -27,10 +27,10 @@ yarn-error.log*
 config.json
 
 /app/public
-#/src/public
+/src/public/products/uploads
 #/public
 .idea
 .prettierrc
 /public/product/
 /public/profile/
-/src/public/uploads/
+/src/public/products/uploads/
