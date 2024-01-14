@@ -6,53 +6,25 @@ const adminDetailsController = require('../../controllers/Admin/details/details.
 
 const {checkErrors} = require('../../middlewares/error/checkValidationError')
 
-detailsRouter.post('/createSpecial',
+detailsRouter.post('/create',
     // registerValidator(),
     (req, res, next) => {checkErrors(req, res, next)},
-    adminDetailsController.createSpecial);
+    adminDetailsController.createDetail);
 
-detailsRouter.post('/createStorage',
-    // registerValidator(),
-    (req, res, next) => {checkErrors(req, res, next)},
-    adminDetailsController.createStorage);
 
-detailsRouter.post('/createRam',
+detailsRouter.patch('/update/:id',
     // registerValidator(),
     (req, res, next) => {checkErrors(req, res, next)},
-    adminDetailsController.createRam);
+    adminDetailsController.updateDetail);
 
-detailsRouter.post('/createOpSystem',
+detailsRouter.delete('/delete/:id',
     // registerValidator(),
     (req, res, next) => {checkErrors(req, res, next)},
-    adminDetailsController.createOpSystem);
+    adminDetailsController.deleteDetail);
 
-detailsRouter.post('/createProductSpecial',
+detailsRouter.get('/getAll',
     // registerValidator(),
     (req, res, next) => {checkErrors(req, res, next)},
-    adminDetailsController.createProductSpecial);
+    adminDetailsController.getAllDetails);
 
-detailsRouter.patch('/updateOpSystem/:id',
-    // registerValidator(),
-    (req, res, next) => {checkErrors(req, res, next)},
-    adminDetailsController.updateOpSystem);
-
-detailsRouter.patch('/updateRam/:id',
-    // registerValidator(),
-    (req, res, next) => {checkErrors(req, res, next)},
-    adminDetailsController.updateRam);
-
-detailsRouter.patch('/updateSpecial/:id',
-    // registerValidator(),
-    (req, res, next) => {checkErrors(req, res, next)},
-    adminDetailsController.updateSpecial);
-
-detailsRouter.patch('/updateStorage/:id',
-    // registerValidator(),
-    (req, res, next) => {checkErrors(req, res, next)},
-    adminDetailsController.updateStorage);
-
-detailsRouter.patch('/updateProductSpecial/:id',
-    // registerValidator(),
-    (req, res, next) => {checkErrors(req, res, next)},
-    adminDetailsController.updateProductSpecial);
-module.exports = detailsRouter;
+module.exports = detailsRouter
