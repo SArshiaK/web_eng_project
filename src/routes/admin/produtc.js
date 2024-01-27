@@ -11,4 +11,12 @@ productRouter.post('/createProduct',
     // registerValidator(),
     (req, res, next) => {checkErrors(req, res, next)}, adminProductController.createProduct);
 
+productRouter.get('/getAllProducts',
+    // registerValidator(),
+    (req, res, next) => {checkErrors(req, res, next)}, adminProductController.getAllProducts);
+
+productRouter.get('/getProductById/:id',
+    // registerValidator(),
+    (req, res, next) => {checkErrors(req, res, next)}, adminProductController.getProductById);
+
 module.exports = productRouter;
