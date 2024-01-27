@@ -1,4 +1,6 @@
 const productService = require('../../../services/product/product.service');
+const path = require("path");
+const fs = require('fs')
 const {getAllProductsTransform, productTransform} = require("../../../transform/product/product.transform");
 
 const createProduct = async (req, res) => {
