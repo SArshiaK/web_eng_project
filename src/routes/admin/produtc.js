@@ -9,7 +9,8 @@ const {checkErrors} = require('../../middlewares/error/checkValidationError')
 
 productRouter.post('/createProduct',
     // registerValidator(),
-    (req, res, next) => {checkErrors(req, res, next)}, adminProductController.createProduct);
+    (req, res, next) => {checkErrors(req, res, next)},
+    adminProductController.createProduct);
 
 productRouter.get('/getAllProducts',
     // registerValidator(),
