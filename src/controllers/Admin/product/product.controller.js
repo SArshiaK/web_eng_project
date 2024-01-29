@@ -3,6 +3,7 @@ const path = require("path");
 const fs = require('fs')
 const {getAllProductsTransform, productTransform} = require("../../../transform/product/product.transform");
 
+
 const createProduct = async (req, res) => {
     try {
         if(req.body?.base64){
